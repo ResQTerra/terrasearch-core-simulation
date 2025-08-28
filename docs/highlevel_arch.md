@@ -66,7 +66,7 @@ To ensure efficient and reliable communication:
 
 ```mermaid
 graph TD
-    subgraph Cerberus v0.3 Architecture
+    subgraph Cerberus_v0.3_Architecture["Cerberus v0.3 Architecture"]
         A["Application Layer (Drone Swarm Control, Mission Planning)"]
         B["Communication Manager & Decision Engine"]
         C["BitChat Mesh Communication Module"]
@@ -95,15 +95,15 @@ graph TD
     E --> J
     F --> J
 
-    style B fill:#ADD8E6,stroke:#333,stroke-width:2px
-    style C fill:#90EE90,stroke:#333,stroke-width:2px
-    style D fill:#FFD700,stroke:#333,stroke-width:2px
-    style E fill:#FFD700,stroke:#333,stroke-width:2px
-    style F fill:#FFD700,stroke:#333,stroke-width:2px
-    style G fill:#FFB6C1,stroke:#333,stroke-width:2px
-    style H fill:#FFB6C1,stroke:#333,stroke-width:2px
-    style I fill:#FFB6C1,stroke:#333,stroke-width:2px
-    style J fill:#D3D3D3,stroke:#333,stroke-width:2px
+    style B fill:#ADD8E6,stroke:#333,stroke-width:2px,color:#000
+    style C fill:#90EE90,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style E fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#FFB6C1,stroke:#333,stroke-width:2px,color:#000
+    style H fill:#FFB6C1,stroke:#333,stroke-width:2px,color:#000
+    style I fill:#FFB6C1,stroke:#333,stroke-width:2px,color:#000
+    style J fill:#D3D3D3,stroke:#333,stroke-width:2px,color:#000
 ```
 ## 4.1 Complete Architecture Diagram
 
