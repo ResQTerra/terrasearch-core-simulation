@@ -64,13 +64,13 @@ if __name__ == "__main__":
     # Initialize Communication Blackout Protocols components
     comm_manager_for_blackout = MockCommManagerForBlackout()
     mock_beacon_for_blackout = MockEmergencyBeacon()
-    blackout_detector = CommunicationBlackoutDetector(comm_manager_for_blackout, mock_beacon_for_blackout)
+    blackout_detector = CommunicationBlackoutDetector(comm_manager_for_blackout, mock_beacon_for_blackout, blackout_threshold=12)
 
     # Initialize Autonomous Recovery Protocols components
     flight_controller = MockFlightController()
     network_manager = MockNetworkManager()
     sensor_provider = MockSensorProvider()
-    autonomous_recovery = AutonomousRecoveryManager(flight_controller, network_manager, sensor_provider)
+    autonomous_recovery = AutonomousRecoveryManager(flight_controller, network_manager, sensor_provider, mock_beacon_for_blackout, sat_comm_module)
 
     # --- Scenario 1: Satellite Communication Test ---
     print("\n--- Scenario 1: Satellite Communication Test ---")

@@ -30,14 +30,14 @@ class HeartbeatMonitor:
 
 class CommunicationBlackoutDetector:
     """Detects communication blackouts and manages the state."""
-    def __init__(self, comm_manager, emergency_beacon):
+    def __init__(self, comm_manager, emergency_beacon, blackout_threshold=10):
         self.comm_manager = comm_manager
         self.emergency_beacon = emergency_beacon
         self.heartbeat_monitor = HeartbeatMonitor(comm_manager.get_all_modules())
         
         self.state = BlackoutState.NORMAL
         self.last_contact_time = time.time()
-        self.blackout_threshold = 10 # seconds
+        self.blackout_threshold = blackout_threshold # seconds
 
     def run_check(self):
         print("\n[BlackoutDetector] Running check...")

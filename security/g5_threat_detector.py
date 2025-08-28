@@ -48,9 +48,11 @@ class MockSecure5GModule:
 
 class G5ThreatDetector:
     """Conceptual G5 Threat Detector for 5G-specific threats."""
-    def __init__(self, five_g_module: MockSecure5GModule):
+    def __init__(self, five_g_module: MockSecure5GModule, density_threshold_multiplier=2.0, expected_density=2.0):
         self.five_g_module = five_g_module
         self.threat_alerts = []
+        self.density_threshold_multiplier = density_threshold_multiplier
+        self.expected_density = expected_density
 
     def monitor_network_anomalies(self):
         print("\n[G5ThreatDetector] Monitoring 5G network anomalies...")
@@ -79,9 +81,8 @@ class G5ThreatDetector:
     def detect_impossible_basestation_density(self) -> bool:
         # Simulate too many base stations in a remote area = IMSI catcher
         basestation_count = len(self.five_g_module.get_nearby_basestations(radius_km=2))
-        expected_density = self.expected_density_for_area() # Based on drone's current location
-        print(f"  - Basestation count: {basestation_count}, Expected: {expected_density}")
-        return basestation_count > (expected_density * 2) # Threshold
+        print(f"  - Basestation count: {basestation_count}, Expected: {self.expected_density}")
+        return basestation_count > (self.expected_density * self.density_threshold_multiplier) # Threshold
 
     def encryption_strength_decreased(self, expected_level: float) -> bool:
         current_level = self.five_g_module.get_current_encryption_level()
@@ -101,9 +102,7 @@ class G5ThreatDetector:
         print(f"  - RF Fingerprint Similarity: {similarity:.2f}")
         return similarity < 0.8 # Threshold for mismatch
 
-    def expected_density_for_area(self) -> float:
-        # Mock: varies based on simulated location
-        return 2.0 # Example: 2 basestations expected in this area
+    
 
     def lookup_legitimate_basestation_rf(self):
         # Mock: In a real system, this would query a trusted database
@@ -125,7 +124,7 @@ class G5ThreatDetector:
 # Example Usage:
 if __name__ == "__main__":
     mock_5g_module = MockSecure5GModule()
-    g5_detector = G5ThreatDetector(mock_5g_module)
+    g5_detector = G5ThreatDetector(mock_5g_module, density_threshold_multiplier=2.5, expected_density=3.0)
 
     print("--- Initial Monitoring ---")
     g5_detector.monitor_network_anomalies()

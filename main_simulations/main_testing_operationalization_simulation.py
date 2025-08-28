@@ -15,6 +15,11 @@ from testing.security_testing_framework import SecurityTestingFramework, IMSICat
 from protocols.communication_blackout_protocols import CommunicationBlackoutDetector, MockCommManager as MockCommManagerForBlackout, MockEmergencyBeacon
 from protocols.autonomous_recovery_protocols import AutonomousRecoveryManager, MockFlightController, MockNetworkManager, MockSensorProvider
 
+class MockSatelliteCommunicationModule:
+    def activate(self):
+        print("[MockSatComm] Activating...")
+        return True
+
 # --- Mock System for Security Testing ---
 # This mock system is created specifically for this simulation to be tested by the framework.
 class MockSystemForTesting:
@@ -47,12 +52,13 @@ if __name__ == "__main__":
     # Initialize components for Scenario 2
     comm_manager_for_blackout = MockCommManagerForBlackout()
     mock_beacon_for_blackout = MockEmergencyBeacon()
-    blackout_detector = CommunicationBlackoutDetector(comm_manager_for_blackout, mock_beacon_for_blackout)
+    blackout_detector = CommunicationBlackoutDetector(comm_manager_for_blackout, mock_beacon_for_blackout, blackout_threshold=12)
     
     flight_controller = MockFlightController()
     network_manager = MockNetworkManager()
     sensor_provider = MockSensorProvider()
-    autonomous_recovery = AutonomousRecoveryManager(flight_controller, network_manager, sensor_provider)
+    sat_comm_module = MockSatelliteCommunicationModule()
+    autonomous_recovery = AutonomousRecoveryManager(flight_controller, network_manager, sensor_provider, mock_beacon_for_blackout, sat_comm_module)
 
 
     # --- Scenario 1: Security Testing ---
