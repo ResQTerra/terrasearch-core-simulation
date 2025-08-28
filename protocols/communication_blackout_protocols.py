@@ -84,14 +84,33 @@ class MockCommManager:
         return self.modules
 
 class MockEmergencyBeacon:
+    def __init__(self, cooldown_period=60):
+        self.last_activated_time = 0
+        self.cooldown_period = cooldown_period
+        self.is_active = False
+
     def activate(self):
+        current_time = time.time()
+        if self.is_active:
+            return
+
+        if current_time - self.last_activated_time < self.cooldown_period:
+            print("[MockBeacon] Activation attempted during cooldown. Ignoring.")
+            return
+
         print("[MockBeacon] Activated!")
+        self.is_active = True
+        self.last_activated_time = current_time
+
     def deactivate(self):
+        if not self.is_active:
+            return
         print("[MockBeacon] Deactivated.")
+        self.is_active = False
 
 if __name__ == "__main__":
     comm_manager = MockCommManager()
-    beacon = MockEmergencyBeacon()
+    beacon = MockEmergencyBeacon(cooldown_period=5)
     detector = CommunicationBlackoutDetector(comm_manager, beacon)
 
     # Simulate normal operations

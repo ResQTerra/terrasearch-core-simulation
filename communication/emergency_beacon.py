@@ -27,17 +27,26 @@ class MockRadioInterface:
 
 class EmergencyBeaconModule:
     """Manages the emergency beacon for communication blackout scenarios."""
-    def __init__(self, drone_id="Drone-007"):
+    def __init__(self, drone_id="Drone-007", cooldown_period=60):
         self.radio_interface = MockRadioInterface()
         self.drone_id = drone_id
         self.is_active = False
         self.thread = None
+        self.last_activated_time = 0
+        self.cooldown_period = cooldown_period
 
     def activate(self):
+        current_time = time.time()
         if self.is_active:
             return
+
+        if current_time - self.last_activated_time < self.cooldown_period:
+            print("[EmergencyBeacon] Activation attempted during cooldown. Ignoring.")
+            return
+
         print("[EmergencyBeacon] Activating...")
         self.is_active = True
+        self.last_activated_time = current_time
         self.thread = threading.Thread(target=self._broadcast_loop, daemon=True)
         self.thread.start()
 
