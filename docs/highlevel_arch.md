@@ -219,18 +219,18 @@ graph TD
     Testing -- Adversarially Tests --> Secure5G & MeshModule
 
     %% Styling
-    style Runner fill:#D2B4DE,stroke:#333
-    style CommManager fill:#ADD8E6,stroke:#333,stroke-width:4px
-    style Secure5G fill:#90EE90,stroke:#333
-    style MeshModule fill:#90EE90,stroke:#333
-    style SatComm fill:#F0E68C,stroke:#333
-    style Beacon fill:#FFA07A,stroke:#333
-    style UTD fill:#FFB6C1,stroke:#333
-    style AutoRecovery fill:#FFB6C1,stroke:#333
-    style Blackout fill:#FFB6C1,stroke:#333
-    style PerfOpt fill:#FFB6C1,stroke:#333
-    style Testing fill:#A9A9A9,stroke:#333
-    style Operational fill:#A9A9A9,stroke:#333
+    style Runner fill:#D2B4DE,stroke:#333,color:#000
+    style CommManager fill:#ADD8E6,stroke:#333,stroke-width:4px,color:#000
+    style Secure5G fill:#90EE90,stroke:#333,color:#000
+    style MeshModule fill:#90EE90,stroke:#333,color:#000
+    style SatComm fill:#F0E68C,stroke:#333,color:#000
+    style Beacon fill:#FFA07A,stroke:#333,color:#000
+    style UTD fill:#FFB6C1,stroke:#333,color:#000
+    style AutoRecovery fill:#FFB6C1,stroke:#333,color:#000
+    style Blackout fill:#FFB6C1,stroke:#333,color:#000
+    style PerfOpt fill:#FFB6C1,stroke:#333,color:#000
+    style Testing fill:#A9A9A9,stroke:#333,color:#000
+    style Operational fill:#A9A9A9,stroke:#333,color:#000
 ```
 
 ## 5. Conclusion
